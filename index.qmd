@@ -1,0 +1,39 @@
+---
+title: "Billboard Graphic"
+execute:
+    echo: false
+---
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+library(tidyr)
+data("billboard")
+billboard_long <- billboard %>%
+  pivot_longer(
+    cols = starts_with("wk"),
+    names_to = "week",
+    values_to = "rank",
+    values_drop_na = TRUE
+  ) %>%
+  mutate(
+    week = as.integer(str_remove(week, "wk"))
+  )
+artists_to_plot <- c("Usher", "Madonna", "Creed", "Destiny's Child")
+
+billboard_long %>%
+  filter(artist %in% artists_to_plot) %>%
+  ggplot(aes(x = week, y = rank, color = track)) +
+  geom_line() +
+  scale_y_reverse() +  # Lower rank = higher chart position
+  labs(
+    title = "Billboard Chart Performance (2000)",
+    x = "Week on Chart",
+    y = "Rank (1 = Best)",
+    color = "Track"
+  ) +
+  theme_minimal()
+```
