@@ -2,4 +2,8 @@
 title: "About"
 ---
 
-About this site
+## About Me
+
+My name is **Shuntaro Kawakami**, and I graduated from *Carnegie Mellon University*.
+
+[Kane's Free Data Science Bootcamp](https://bootcamp.davidkane.info)
